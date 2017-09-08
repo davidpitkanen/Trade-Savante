@@ -1,0 +1,43 @@
+{% extends "tradesavante/header.html" %}
+
+{% block content %}
+<br/>
+<br/>
+
+<div class="row">
+<div class="col-md-2 col-md-offset-5">
+
+	
+{% if signin %}
+	
+<form action="/tradesavante/signin/" method="post" enctype="multipart/form-data">	
+	
+{% else %}
+
+<form action="/tradesavante/signup/" method="post" enctype="multipart/form-data">
+
+{% endif %}
+
+	{% csrf_token %}
+	</br>
+    {{ form }}
+	
+    <p> <i> {{msg}}  </i> </p>
+
+    <input type="submit" value="Submit" />   
+	
+	{% if signin %}
+
+	
+	or	<a href="/tradesavante/signup/"> Sign Up </a>  
+{% endif %}
+
+	
+	
+
+	</form>
+
+</div>
+</div>
+
+{% endblock %}

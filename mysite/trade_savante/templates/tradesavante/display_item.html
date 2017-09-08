@@ -1,0 +1,37 @@
+{% extends "tradesavante/header.html" %}
+
+{% block content %}
+<br/>
+<br/>
+
+<div class="row">
+  <div class="col-sm-2">
+
+	  {% include "tradesavante/includes/add_item_sidebar.html" %}
+
+  </div>
+	
+	
+	
+  <div class="col-sm-10">
+
+	  
+	<div class="media">
+      <div class="media-left">
+      <img src= {{url}} class="media-object" style="width:100px">
+      </div>
+    <div class="media-body">
+    
+	<h4 class="media-heading">{{trade_form.name}}</h4>
+    <p>{{trade_form.description}} </p>
+
+		</div>
+
+	  
+	  
+
+  </div>
+
+</div>
+
+{% endblock %}

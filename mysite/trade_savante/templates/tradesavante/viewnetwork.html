@@ -1,0 +1,79 @@
+{% extends "tradesavante/header.html" %}
+
+	
+{% block content %}
+
+
+<div class="row">
+	  <div class="col-sm-2">
+
+<br/>
+{% include "tradesavante/includes/network_sidebar.html" %}
+
+      </div>	
+	
+    <br/>
+	
+  <div class="col-sm-10">
+	  
+
+    <form action="/tradesavante/selectitem/" method="GET" enctype="multipart/form-data">
+
+		
+		<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Network</th>
+      <th>Trade</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for trade in trades %}
+      <tr>
+        <td>{{ trade.ownerItem.name }} </td>
+        <td>{{ trade.ownerItem.price }}</td>
+        <td>{{ trade.ownerItem.description }}</td>
+		<td><a href="/tradesavante/seenetwork/?id={{trade.ownerItem.id}}"> View Network </a>  </td>
+		<td><a href="/tradesavante/selectitem/?id={{trade.ownerItem.id}}"> Trade </a>  </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+		</form>
+		
+    <form action="/tradesavante/edititems/" method="GET" enctype="multipart/form-data">
+
+{% if trades.has_other_pages %}
+  <ul class="pagination">
+    {% if trades.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in trades.paginator.page_range %}
+      {% if trades.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if trades.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}		
+		
+		
+	  </form>
+
+  </div>
+
+</div>
+
+{% endblock %}
