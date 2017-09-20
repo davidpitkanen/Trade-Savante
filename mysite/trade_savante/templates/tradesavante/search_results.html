@@ -16,42 +16,29 @@
 	
   <div class="col-sm-10">
 	  
-
-
+	  
+    {%  for trade in trades %}
 		
-		<table class="table table-bordered">
-  <thead>
+ <table>
     <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Network</th>
-      <th>Trade</th>
-      <th>Has Path</th>
-    </tr>
-  </thead>
-  <tbody>
-    {%  for trade, tf in trades %}
-      <tr>
-        <td>{{ trade.name }} </td>
-        <td>{{ trade.price }}</td>
-        <td>{{ trade.description }}</td>
-		  <td><a href="/tradesavante/seenetwork/?id={{trade.id}}"> {{trade.name}}'s Network </a>  </td>
-		<td><a href="/tradesavante/selectitem/?id={{trade.id}}"> Trade </a>  </td>
-        <td>
-			
-			{% if not tf %}
-			Yo Yo
-			{% else %}
+        <td rowspan="3">  <img class="card-img-top img-rounded" src= {{trade.image.url}} alt="Card image cap" style="width:100px;height:125px;margin-left:auto;margin-right:auto">
+ </td>
+		<td>
+	   <a href="/tradesavante/explore/?{{trade.id}}"> {{trade.name}}</a> </td>
+       </tr>
+	 <tr>
+        <td > <b> Description: </b> <br/> {{trade.description}}  </td>
+	</tr>
+	  <tr>
+		  <td><b>Price:</b> ${{trade.price}}</td>
+	  </tr>
+	 <tr>
+		 <td>  </td>
+		 <td><a href="/tradesavante/mark_as_wanted/?item_id={{trade.id}}"> Mark as Wanted </a> </td>
+		 </tr>
+	  </table>
 
-			Chaps sup 
-
-			{% endif %}
-		</td>
-      </tr>
     {% endfor %}
-  </tbody>
-</table>
 
 		
     <form action="/tradesavante/edititems/" method="GET" enctype="multipart/form-data">

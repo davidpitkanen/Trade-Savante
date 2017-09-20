@@ -1,0 +1,77 @@
+{% extends "tradesavante/header.html" %}
+
+
+
+{% block content %}
+
+<div class="row">
+	  <div class="col-sm-2">
+
+		  <br/>
+{% include "tradesavante/includes/home_sidebar.html" %}
+
+    </div>	
+	
+	
+	
+    <br/>
+	
+  <div class="col-sm-10">
+	  
+	  <h4><b>Current Item</b></h4>
+
+	   <table>
+    <tr>
+        <td rowspan="3">  <img class="card-img-top img-rounded" src= {{currentItem.image.url}} alt="Card image cap" style="width:100px;height:125px;margin-left:auto;margin-right:auto">
+ </td>
+		<td>
+	   <a href="/tradesavante/explore/?{{trade.id}}"> {{currentItem.name}}</a> </td>
+       </tr>
+	 <tr>
+        <td > <b> Description: </b> <br/> {{currentItem.description}}  </td>
+	</tr>
+	  <tr>
+		  <td><b>Price:</b> ${{currentItem.price}}</td>
+	  </tr>
+</table>
+	  
+	  <br/> <br/>
+
+    <form action="/tradesavante/explore_next/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+		<h4><b>Next Step:</b>Pick Next Item</h4>
+		<p>These are the items that the user who owns the current items has said they want </p>
+		<p> The goal is to find a path back to a user who wants your item so that a trade network will be formed</p>
+		<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>See Network</th>
+      <th>Choose As Next</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for trade in trades %}
+      <tr>
+        <td>{{ trade.ownerItem.name }} </td>
+        <td>{{ trade.ownerItem.price }}</td>
+        <td>{{ trade.ownerItem.description }}</td>
+		<td><a href="/tradesavante/seenetwork/?id={{trade.ownerItem.id}}"> See Network </a>  </td>
+		<td> <button name="picture" type=submit value={{trade.ownerItem.id}} >Pick</button> 
+			<input type="hidden" name="seqkey" value={{seqid}}>
+		  </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+		</table>
+
+	  </form>
+		
+
+  </div>
+
+</div>
+{% endblock %}

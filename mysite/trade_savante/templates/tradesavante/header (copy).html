@@ -19,9 +19,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/tradesavante/">Home</a></li>
-      <li><a href="/tradesavante/additem/"> Enter Items </a></li>
-      <li><a href="/tradesavante/askforitems/"> Ask For Items </a></li>
-      <li><a href="/tradesavante/explore/"> Expand Network </a></li>
+      <li><a href="/tradesavante/additem/"> Add/Edit</a></li>
+      <li><a href="/tradesavante/network/"> Wanted Items </a></li>
+      <li><a href="/tradesavante/explore/"> Trade Network </a></li>
       <li><a href="/tradesavante/sendmessage/"> Email Magic </a></li>
 	  {% if loggedout %}
 	  <li><a href="/tradesavante/signin/"> Login </a></li>
@@ -35,21 +35,34 @@
 <br/>
 
 		<img src="/static/headerpic.png" alt="Mountain View" height="50" width="300" align="middle"/>
+		
 				 <form  action="/tradesavante/search/" method="GET" enctype="multipart/form-data">
-		
-					 <br/> <br/>
-					 
-	{{search_form.as_table}}
 
-		
- <button class="btn btn-default" type="submit">
+		<table>
+			 
+			<tr>
+				<th colspan="5"> <input type="text" name="networksearch" class="form-control" placeholder="Search"></th>
+				<th>
+					<div class="dropdown">
+              <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select> 
+               </div>  
+			   </th>
+			   <th>
+				 <button class="btn btn-default" type="submit">
                <i class="glyphicon glyphicon-search"></i>
-               </button>  
+               </button>   
+			 </th>	
+			</tr>
+		</table>		
 		
 		</form>
-		<br/>
-		<div>
 		
+		<div>
         {% block content %}
 			
         {% endblock %}

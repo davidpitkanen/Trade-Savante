@@ -1,0 +1,32 @@
+{% block content %}
+
+
+<h4 align="middle"> <b>Explorations </b> ({{num_possible_trades}} created) </h4 >
+	
+	
+	<table class="table table-bordered table-inverse">
+  <thead>
+    <tr>
+      <th>Name</th>
+	  <th>Name <font size="1">(first item) </font></th>
+      <th>Name <font size="1">(last item) </font></th>
+      <th>Trade Length</th>
+    </tr>
+  </thead>
+  <tbody>
+
+   {% for name, max, min, lgth in sequence_info %}
+    <tr class="info">
+      <th scope="row">{{name}}</th>
+      <td> {{min}}</td>
+      <td>{{max}}</td>
+      <td>{{lgth}}</td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+		
+		
+	  
+
+{% endblock %}

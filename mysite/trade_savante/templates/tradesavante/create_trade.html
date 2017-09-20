@@ -1,0 +1,81 @@
+{% extends "tradesavante/header.html" %}
+
+{% block content %}
+<br/>
+<br/>
+
+<div class="row">
+	  <div class="col-sm-2">
+
+{% include "tradesavante/includes/add_item_sidebar.html" %}
+
+    </div>	
+	
+	
+	<h1>Propose a Trade</h1>
+  <div class="col-sm-4">
+	  
+    <form action="/tradesavante/edititems/" method="GET" enctype="multipart/form-data">
+    {% csrf_token %}
+
+			<h4> Item you want: </h4>
+
+<div class="media">
+      <div class="media-left">
+      <img src= {{tradeitem.image.url}} class="media-object" style="width:200px">
+      </div>
+    <div class="media-body">
+    
+	<h4 class="media-heading">Name:</h4>
+	<p>	 {{tradeitem.name}} </p>
+	<h4 class="media-heading">Description:</h4>
+    <p>{{tradeitem.description}}.</p>
+	<h4 class="media-heading">Asking:</h4>
+	<p>Asking For something good.  </p>
+		<p>
+		<button name="delete" value={{tradeitem.id}} type="submit" class="btn btn-primary">Wanted Items</button>
+		</p>
+		</div>
+   </div>
+		
+	  </form>
+
+  </div>
+	  <div class="col-sm-6">
+		
+    <form action="/tradesavante/selectitem/" method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+		<input type="hidden" name="desireditem" value="{{tradeitem.id}}">
+		<h2> Pick one of your items for the trade: </h2>
+		
+		<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Select </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for trade in trades %}
+      <tr>
+        <td>{{ trade.name }} </td>
+        <td>{{ trade.price }}</td>
+        <td>{{ trade.description }}</td>
+  		<td> <button name="myitem" value={{trade.id}} type="submit" class="btn btn-primary">Request Trade</button> </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+		</form>
+				  
+      </div>
+
+
+</div>
+
+{% endblock %}

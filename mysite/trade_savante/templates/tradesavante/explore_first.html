@@ -45,13 +45,16 @@ div.desc {
 	
 
 <h1>New Exploration </h1>
-	  
+
+	<form action="/tradesavante/explore_step2/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+	
 Enter a Exploration Name:
 	  <input type="text" name="ename">
 	  
 <h2>Pick one of your items to begin: </h2>
 
-<form action="/tradesavante/explore_step2/" method="GET" enctype="multipart/form-data">
 
 	  {% for item in users_items %}
 

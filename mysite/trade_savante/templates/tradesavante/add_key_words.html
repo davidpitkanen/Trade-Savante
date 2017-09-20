@@ -21,7 +21,9 @@
 	  
 	  {% endif %}
 	  
-    <form action="/tradesavante/additem/" method="post" enctype="multipart/form-data">
+	  
+	 <h4>Add key words separated by commas to help search for your item: </h4>
+    <form action="/tradesavante/addkeywords/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
 	  <table class="table table-bordered table-inverse">
@@ -29,9 +31,7 @@
 		  <tr>
 			  <th colspan="2">
 	  <input type="submit" value="Submit" /> 
-				  {% if pkey %}
-				  <input type="hidden" name="pkey" value={{pkey}}>
-				  {% endif %}
+				  <input type="text" name="itemid" value={{id}}>
 				  </th>
 			  </tr>
 		  </table>

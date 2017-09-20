@@ -15,12 +15,100 @@
     <br/>
 	
   <div class="col-sm-10">
+
+	  
+	  <h4><b>Items you have selected as wanted: </b> <a href="/tradesavante/explore_step1"> (Create New) </a> </h4>
+	  
+	{% if wanted_items %}
+	  <p>Click on one of these items to create a trade network that leads back to one of your items. </p>
+		
+	  
+	  <br/> <br/>
+
+   {%  for trade in wanted_items %}
+	      <form action="/tradesavante/explore_first/" method="POST" enctype="multipart/form-data">	
+			      {% csrf_token %}
+
+   <table align="center">
+    <tr>
+        <td rowspan="3">  <img class="card-img-top img-rounded" src= {{trade.askerItem.image.url}} alt="Card image cap" style="width:100px;height:125px;margin-left:auto;margin-right:auto">
+        </td>
+		<td>
+	       <a href="/tradesavante/explore/?{{trade.id}}"> {{trade.askerItem.name}}</a> </td>
+		<td rowspan="3"> 	   <img class="card-img-top img-rounded" src= "/static/arrow-blue-outline-right.jpg" alt="Card image cap" style="width:100px;height:125px;margin-left:auto;margin-right:auto">
+        </td>
+
+		<td rowspan="3">  <img class="card-img-top img-rounded" src= {{trade.ownerItem.image.url}} alt="Card image cap" style="width:100px;height:125px;margin-left:auto;margin-right:auto">
+        </td>
+		<td>
+	       <a href="/tradesavante/explore/?{{trade.id}}"> {{trade.ownerItem.name}}</a> </td>
+		
+         </tr>
+	<tr>
+        <td > <b> Description: </b> <br/> {{trade.askerItem.description}}  </td>
+		        <td > <b> Description: </b> <br/> {{trade.ownerItem.description}}  </td>
+
+	</tr>
+	<tr>
+		  <td><b>Price:</b> ${{trade.askerItem.price}}</td>
+				  <td><b>Price:</b> ${{trade.ownerItem.price}}</td>
+
+	</tr>
+	   <tr>
+		  <td colspan ="2"> </td>
+		   
+		   <td>	  <input type="submit" class="btn btn-success" value="Expand This Network"> 
+ </td>
+		  <td colspan ="2"> </td>
+		   <tr/>
+    </table>
+   <input type="hidden" name="trade_id" value="{{trade.id}}">
+	  </form>	  
+    {% endfor %}
+		{% else %}
+	  
+	  <p>You have not yet selected any items you want. Before exploring the network you need to select items you want.  This connects you to the network by telling 
+		  other users the items you want so trade networks can be formed.  Instruction Link</p>
+	  {% endif %} 
+	   <br/> <br/>
 	  
 
-	  <h1>Explorations <a href="/tradesavante/explore_step1"> (Create New) </a> </h1>
-		
-<h1>Others Explorations</h1>
+	  
+<h4><b>Saved Explorations</b></h4>
+	  	{% if explorations_created %}
 
+	  		<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Start Item</th>
+      <th>End Item</th>
+      <th>Number of Items in Trade</th>
+      <th>Is Closed?</th>
+      <th>Choose As Next</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sequence in sequence_items %}
+      <tr>
+        <td>{{ sequence.name }} </td>
+        <td>{{ sequence.tradeConnection.name }}</td>
+        <td>{{ sequence.tradeConnection.image.url }}</td>
+		<td><a href="/tradesavante/seenetwork/"> See Network </a>  </td>
+		<td> <button name="picture" type=submit value={1 >Pick</button> 
+			<input type="hidden" name="seqkey" value=1>
+		  </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+	  
+	  
+		{% else %}
+	  
+	  <p>You have not yet selected any items you want. Before exploring the network you need to select items you want.  This connects you to the network by telling 
+		  other users the items you want so trade networks can be formed.  Instruction Link</p>
+	  {% endif %}
+	  
 </div>
 
 </div>
